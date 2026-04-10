@@ -1,6 +1,15 @@
 services:
+
+  redis:
+    image: redis:7-alpine
+
   app:
     build: ./app
+    image: devops-lab:v1
+    environment:
+      - REDIS_HOST=redis
+    depends_on:
+      - redis
 
   nginx:
     build: ./nginx
